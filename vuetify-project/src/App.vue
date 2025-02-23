@@ -20,6 +20,8 @@
         <RouterLink class="nav-link" to="/Details">Details</RouterLink>
         <RouterLink class="nav-link" to="/signup">Signup</RouterLink>
         <RouterLink class="nav-link" to="/login">login</RouterLink>
+        <RouterLink class="nav-link" to="/cart">CartPage</RouterLink>
+
 
       </nav>
 

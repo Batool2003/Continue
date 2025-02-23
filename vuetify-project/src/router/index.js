@@ -6,6 +6,10 @@ import Details from '@/components/User/Details.vue'
 import profile from '@/components/User/Profile.vue'
 import SignUp from '@/components/User/signUp.vue'
 import LogIn from '@/components/User/LogIn.vue'
+import FoterList from '@/components/User/FooterList.vue'
+import CartPage from '@/components/User/CartPage.vue' // استيراد صفحة السلة
+
+
 
 const routes = [
   // user routes (global routes)
@@ -15,6 +19,9 @@ const routes = [
   { path: '/login', component: LogIn },
    { path: '/profile', component: profile },
   { path: '/Details', component: Details },
+  { path: '/FootList', component:FoterList },
+  { path: '/cart', component: CartPage }, // إضافة المسار هنا
+
 
 
   // admin routes

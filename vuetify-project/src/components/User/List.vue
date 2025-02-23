@@ -1,97 +1,72 @@
 <template>
-    <v-app id="inspire">
-      <v-system-bar>
-        <v-spacer></v-spacer>
-  
-       
-        <v-icon>mdi-triangle</v-icon>
-      </v-system-bar>
-  
-  
-      <v-footer
-        color="grey"
-        height="44"
-        app
-      ></v-footer>
-  
-      <!-- <v-navigation-drawer floating> -->
-       
-  
-  
-      <v-main>
-        <v-sheet
-          class="mx-auto pa-2 pt-6"
-          color="grey-lighten-4"
-        >
-          <v-sheet
-            color="grey-lighten-2"
-            height="24"
-            rounded="pill"
-            width="88"
-          ></v-sheet>
-  
-          <v-slide-group show-arrows>
-            <v-slide-group-item
-              v-for="n in 5"
-              :key="n"
-            >
-              <v-sheet
-                class="ma-4"
-                color="grey-lighten-1"
-                height="200"
-                width="250"
-                rounded
-              ></v-sheet>
-            </v-slide-group-item>
-          </v-slide-group>
-        </v-sheet>
-  
-        <v-sheet
-          class="mx-auto pa-2 pt-6"
-          color="grey-lighten-2"
-        >
-          <v-sheet
-            color="grey"
-            height="24"
-            rounded="pill"
-            width="88"
-          ></v-sheet>
-  
-          <v-slide-group show-arrows>
-            <v-slide-group-item
-              v-for="n in 15"
-              :key="n"
-            >
-              <v-sheet
-                :width="n === 1 ? 300 : 150"
-                class="ma-3"
-                color="grey-lighten-1"
-                height="200"
-                rounded
-              ></v-sheet>
-            </v-slide-group-item>
-          </v-slide-group>
-  
-          <v-container fluid>
-            <v-row>
-              <v-col
-                v-for="n in 24"
-                :key="n"
-                cols="2"
-              >
-                <v-sheet
-                  color="grey-lighten-1"
-                  height="200"
-                  rounded
-                ></v-sheet>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-sheet>
-      </v-main>
-    </v-app>
-  </template>
-  
-  <script setup>
-    //
-  </script>
+  <v-container>
+    <!-- قائمة المنتجات -->
+    <v-row>
+      <v-col
+        v-for="product in filteredProducts"
+        :key="product.id"
+        cols="12" sm="6" md="4"
+      >
+        <v-card>
+          <v-card-title>{{ product.name }}</v-card-title>
+          <v-card-subtitle>{{ product.price }} ج.م</v-card-subtitle>
+          <v-card-text>{{ product.description }}</v-card-text>
+          <v-btn @click="addToCart(product)">إضافة إلى السلة</v-btn>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+import { useCartStore } from '@/store/cart'; // تأكد من المسار الصحيح للملف
+
+export default {
+  data() {
+    return {
+      searchQuery: '',
+      filter: null,
+      sortBy: null,
+      filters: ['الفئة 1', 'الفئة 2', 'الفئة 3'],
+      sortOptions: ['السعر: من الأقل إلى الأعلى', 'السعر: من الأعلى إلى الأقل'],
+      products: [
+        { id: 1, name: 'منتج 1', price: 100, description: 'وصف المنتج 1' },
+        { id: 2, name: 'منتج 2', price: 200, description: 'وصف المنتج 2' },
+        { id: 3, name: 'منتج 3', price: 150, description: 'وصف المنتج 3' },
+      ],
+    };
+  },
+  computed: {
+    filteredProducts() {
+      let filtered = this.products;
+
+      if (this.searchQuery) {
+        filtered = filtered.filter(product =>
+          product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+
+      if (this.filter) {
+        filtered = filtered.filter(product => product.category === this.filter);
+      }
+
+      if (this.sortBy) {
+        if (this.sortBy === 'السعر: من الأقل إلى الأعلى') {
+          filtered.sort((a, b) => a.price - b.price);
+        } else {
+          filtered.sort((a, b) => b.price - a.price);
+        }
+      }
+
+      return filtered;
+    },
+  },
+  methods: {
+    addToCart(product) {
+      const cartStore = useCartStore();
+      cartStore.addProduct(product); // إضافة المنتج إلى السلة
+      this.$router.push('/cart'); // الانتقال إلى صفحة السلة
+    },
+  },
+};
+</script>
