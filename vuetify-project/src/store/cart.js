@@ -1,45 +1,27 @@
-
-// stores/cart.js
 import { defineStore } from 'pinia';
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    cartItems: [],
+    cart: [],
   }),
   actions: {
-    // إضافة منتج إلى السلة
-    addProduct(product) {
-      // تحقق إذا كان المنتج موجودًا بالفعل في السلة، وإذا كان كذلك، قم بزيادة الكمية
-      const existingProduct = this.cartItems.find(item => item.id === product.id);
-      if (existingProduct) {
-        existingProduct.quantity++;
-      } else {
-        this.cartItems.push({ ...product, quantity: 1 });
-      }
-    },
-    
-    // إزالة منتج من السلة
-    removeProduct(product) {
-      const index = this.cartItems.findIndex(item => item.id === product.id);
-      if (index !== -1) {
-        this.cartItems.splice(index, 1);
-      }
-    },
-    
-    // زيادة الكمية للمنتج
-    increaseQuantity(product) {
-      const item = this.cartItems.find(item => item.id === product.id);
+    addToCart(product) {
+      const item = this.cart.find((p) => p.id === product.id);
       if (item) {
         item.quantity++;
+      } else {
+        this.cart.push({ ...product, quantity: 1 });
       }
+      this.cart = [...this.cart]; // إجبار Pinia على التفاعل مع التغيير
     },
-    
-    // تقليل الكمية للمنتج
-    decreaseQuantity(product) {
-      const item = this.cartItems.find(item => item.id === product.id);
-      if (item && item.quantity > 1) {
-        item.quantity--;
-      }
+    removeFromCart(productId) {
+      this.cart = this.cart.filter((item) => item.id !== productId);
+    },
+    clearCart() {
+      this.cart = [];
     },
   },
 });
+
+
+

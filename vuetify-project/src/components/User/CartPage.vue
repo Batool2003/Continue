@@ -1,76 +1,42 @@
 <template>
-    <v-container>
-      <v-row>
-        <v-col v-for="item in cartItems" :key="item.id" cols="12" sm="6" md="4">
-          <v-card>
-            <v-card-title>{{ item.name }}</v-card-title>
-            <v-card-subtitle>{{ item.price }} ج.م</v-card-subtitle>
-            <v-card-text>{{ item.description }}</v-card-text>
-  
-            <!-- تعديل الكمية -->
-            <v-row>
-              <v-col cols="6">
-                <v-btn @click="decreaseQuantity(item)">-</v-btn>
-                <span>{{ item.quantity }}</span>
-                <v-btn @click="increaseQuantity(item)">+</v-btn>
-              </v-col>
-              <v-col cols="6">
-                <v-btn color="red" @click="removeFromCart(item)">حذف</v-btn>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
-  
-      <!-- إجمالي السلة -->
-      <v-divider></v-divider>
-      <v-row>
-        <v-col>
-          <v-btn color="primary" @click="checkout">إتمام الشراء</v-btn>
-        </v-col>
-        <v-col class="text-right">
-          <v-subheader>الإجمالي: {{ totalPrice }} ج.م</v-subheader>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template>
-  
-  <script>
-  import { useCartStore } from '@/store/cart'; // تأكد من المسار الصحيح للملف
-  
-  export default {
-    data() {
-      return {};
-    },
-    computed: {
-      cartItems() {
-        const cartStore = useCartStore();
-        return cartStore.cartItems;
-      },
-      totalPrice() {
-        return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-      },
-    },
-    methods: {
-      increaseQuantity(item) {
-        const cartStore = useCartStore();
-        cartStore.increaseQuantity(item);
-      },
-      decreaseQuantity(item) {
-        const cartStore = useCartStore();
-        cartStore.decreaseQuantity(item);
-      },
-      removeFromCart(item) {
-        const cartStore = useCartStore();
-        cartStore.removeProduct(item);
-      },
-      checkout() {
-        alert('إتمام الشراء');
-      },
-    },
-  };
-  </script>
-  
+  <v-container>
+    <h2>🛒 سلة المشتريات</h2>
+    
+    <!-- عرض المنتجات في السلة -->
+    <v-list v-if="cart.length">
+      <v-list-item v-for="item in cart" :key="item.id">
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }} (x{{ item.quantity }})</v-list-item-title>
+          <v-list-item-subtitle>السعر: {{ item.price }} $</v-list-item-subtitle>
+        </v-list-item-content>
+        
+        <!-- زر حذف المنتج من السلة -->
+        <v-btn color="red" @click="removeFromCart(item.id)">❌</v-btn>
+      </v-list-item>
+    </v-list>
 
-  
-  
+    <!-- رسالة عند كون السلة فارغة -->
+    <v-alert v-else type="info">السلة فارغة</v-alert>
+
+    <!-- زر إفراغ السلة بالكامل -->
+    <v-btn color="error" @click="clearCart" v-if="cart.length">إفراغ السلة</v-btn>
+  </v-container>
+</template>
+
+<script>
+import { useCartStore } from '@/store/cart';
+import { computed } from 'vue';
+
+export default {
+  setup() {
+    const cartStore = useCartStore();
+    const cart = computed(() => cartStore.cart);
+
+    return {
+      cart,
+      removeFromCart: cartStore.removeFromCart,
+      clearCart: cartStore.clearCart
+    };
+  }
+};
+</script>

@@ -1,100 +1,63 @@
 <template>
-    <v-container>
-      <!-- About Us Section -->
-      <v-row align="center" justify="center">
-        <v-col
-          cols="12"
-          md="5"
-          class="d-flex justify-center"
-        >
-          <v-img
-            src=""
-            alt="About Us Image"
-            max-height="400"
-            class="rounded-circle"
-          />
-        </v-col>
-  
-        <v-col
-          cols="12"
-          md="7"
-        >
-          <v-row>
-            <v-col cols="12">
-              <v-text class="text-h4 font-weight-bold">About Us</v-text>
-              <v-subheading class="text-body-1">
-                نحن شركة مبتكرة تهدف إلى تقديم حلول متقدمة لعملائنا.
-              </v-subheading>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12">
-              <v-btn color="primary">Learn More</v-btn>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-  
-      <!-- Contact Information Cards -->
-      <v-row>
-        <v-col
-          v-for="(card, index) in contactCards"
-          :key="index"
-          cols="12"
-          md="4"
-          class="d-flex justify-center mb-4"
-        >
-          <v-card
-            :elevation="4"
-            class="pa-4 text-center"
-          >
-            <v-card-title>{{ card.title }}</v-card-title>
-            <v-card-text>{{ card.content }}</v-card-text>
-            <v-card-actions>
-              <v-btn :href="card.link" color="primary" target="_blank">Contact</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        contactCards: [
-          {
-            title: 'Email',
-            content: 'contact@company.com',
-            link: 'mailto:contact@company.com',
-          },
-          {
-            title: 'Phone',
-            content: '+1234567890',
-            link: 'tel:+1234567890',
-          },
-          {
-            title: 'Location',
-            content: '123 Business St, City, Country',
-            link: 'https://www.google.com/maps?q=123+Business+St,+City,+Country',
-          },
-        ],
-      };
-    },
-  };
-  </script>
-  
-  <style scoped>
-  .v-img {
-    border-radius: 50%;
-  }
-  .v-title {
-    font-weight: bold;
-  }
-  .v-subheading {
-    color: #555;
-  }
-  </style>
-  
-  
+  <v-container>
+    <v-row>
+      <v-col cols="12" md="6" class="d-flex align-center">
+        <v-img
+          src="https://source.unsplash.com/featured/?mobile,technology"
+          max-width="300"
+          contain
+        ></v-img>
+      </v-col>
+      <v-col cols="12" md="6">
+        <h2>About Us</h2>
+        <h3 class="text-subtitle-1">Sample Headline</h3>
+        <p>
+          Welcome to [Your Store Name]! We are dedicated to providing high-quality products with exceptional customer service. Our mission is to offer a seamless shopping experience with a carefully curated selection of items that cater to your needs. Whether you're looking for the latest trends or timeless essentials, we strive to bring you the best.
+
+At [Your Store Name], customer satisfaction is our top priority. We value trust, quality, and innovation, ensuring that every purchase meets your expectations. Thank you for choosing us—we look forward to serving you!
+        </p>
+        <v-btn color="black" class="mt-4">Contact Us</v-btn>
+      </v-col>
+    </v-row>
+    <v-row class="mt-8">
+      <v-col cols="12" md="4">
+        <v-card class="pa-4 text-center" color="orange">
+          <v-icon size="40">mdi-phone</v-icon>
+          <h3>CALL US</h3>
+          <p>1 (234) 567-891, 1 (234) 987-654</p>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-card class="pa-4 text-center" color="orange">
+          <v-icon size="40">mdi-map-marker</v-icon>
+          <h3>LOCATION</h3>
+          <p>121 Rock Street, 21 Avenue, New York, NY 92103-9000</p>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-card class="pa-4 text-center" color="orange">
+          <v-icon size="40">mdi-clock-outline</v-icon>
+          <h3>HOURS</h3>
+          <p>Mon – Fri: 11 am – 8 pm, Sat, Sun: 6 am – 8 pm</p>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+export default {
+  name: "AboutUs",
+};
+</script>
+
+<style scoped>
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+</style>

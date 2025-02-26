@@ -1,19 +1,22 @@
-/**
- * plugins/vuetify.js
- *
- * Framework documentation: https://vuetifyjs.com`
- */
-
-// Styles
-import '@mdi/font/css/materialdesignicons.css'
+import { createVuetify } from 'vuetify'
 import 'vuetify/styles'
 
-// Composables
-import { createVuetify } from 'vuetify'
+const customTheme = {
+  dark: false, // أو true إذا كنت تريد الوضع الداكن
+  colors: {
+    primary: '#2C3E50', // أزرق داكن (أناقة واحترافية)
+    secondary: '#D4AF37', // ذهبي (لمسة فاخرة وجذابة)
+    background: '#F0F0F0', // رمادي فاتح (إضاءة ووضوح)
+    accent: '#D84315', // برتقالي محروق (لإبراز العناصر المهمة)
+  }
+}
 
-// https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    // defaultTheme: 'dark',
+    themes: {
+      light: customTheme, // تحديد الثيم للضوء
+      dark: customTheme,  // تحديد الثيم للوضع الداكن
+    },
   },
 })
+
