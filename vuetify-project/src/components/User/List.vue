@@ -3,7 +3,7 @@
     <!-- حقل البحث -->
     <v-text-field 
       v-model="search" 
-      label="بحث عن منتج" 
+      label="Search for a product" 
       outlined 
       dense 
       rounded 
@@ -15,7 +15,7 @@
     <v-select
       v-model="selectedCategory"
       :items="categories"
-      label="التصفية حسب الفئة"
+      label="Filter by category"
       outlined
       dense
       clearable
@@ -27,8 +27,8 @@
     <!-- الفلتر حسب السعر -->
     <v-select
       v-model="sortBy"
-      :items="['السعر: من الأرخص إلى الأغلى', 'السعر: من الأغلى إلى الأرخص']"
-      label="الفرز"
+      :items="['Price: from cheapest to most expensive', 'Price: from most expensive to cheapest']"
+      label="Sorting"
       outlined
       dense
       rounded
@@ -77,6 +77,7 @@
               rounded 
               class="btn-hover" 
               :to="`/product/${product.id}`"
+
             >
             Product details
             </v-btn>
@@ -135,9 +136,9 @@ export default {
         filtered = filtered.filter(p => p.category === selectedCategory.value);
       }
 
-      if (sortBy.value === 'السعر: من الأرخص إلى الأغلى') {
+      if (sortBy.value === 'Price: from cheapest to most expensive') {
         filtered.sort((a, b) => a.price - b.price);
-      } else if (sortBy.value === 'السعر: من الأغلى إلى الأرخص') {
+      } else if (sortBy.value === 'Price: from most expensive to cheapest') {
         filtered.sort((a, b) => b.price - a.price);
       }
 
@@ -172,7 +173,9 @@ export default {
 </script>
 
 <style>
-.btn-hover{
-  background-color: ;
+
+.v-btn{
+  font-weight: bold;
+
 }
 </style>

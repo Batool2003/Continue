@@ -1,25 +1,31 @@
 <template>
   <v-container>
-    <h2>🛒 سلة المشتريات</h2>
-    
+    <h2 class="title">🛒 Shopping cart</h2>
+
     <!-- عرض المنتجات في السلة -->
     <v-list v-if="cart.length">
       <v-list-item v-for="item in cart" :key="item.id">
         <v-list-item-content>
           <v-list-item-title>{{ item.title }} (x{{ item.quantity }})</v-list-item-title>
-          <v-list-item-subtitle>السعر: {{ item.price }} $</v-list-item-subtitle>
+          <v-list-item-subtitle class="price">Price: {{ item.price }} $</v-list-item-subtitle>
         </v-list-item-content>
-        
+
         <!-- زر حذف المنتج من السلة -->
-        <v-btn color="red" @click="removeFromCart(item.id)">❌</v-btn>
+        <v-btn color="accent" @click="removeFromCart(item.id)">❌</v-btn>
       </v-list-item>
     </v-list>
 
+    <!-- عرض المجموع عند وجود عناصر -->
+    <v-alert v-if="cart.length" type="success" color="amber lighten-4" class="total-price">
+  🏷️ Total: {{ totalPrice }} $
+</v-alert>
+
+
     <!-- رسالة عند كون السلة فارغة -->
-    <v-alert v-else type="info">السلة فارغة</v-alert>
+    <v-alert v-else type="info" color="accent">Cart empty</v-alert>
 
     <!-- زر إفراغ السلة بالكامل -->
-    <v-btn color="error" @click="clearCart" v-if="cart.length">إفراغ السلة</v-btn>
+    <v-btn color="error" @click="clearCart" v-if="cart.length">Empty cart</v-btn>
   </v-container>
 </template>
 
@@ -32,11 +38,36 @@ export default {
     const cartStore = useCartStore();
     const cart = computed(() => cartStore.cart);
 
+    // حساب مجموع السعر
+    const totalPrice = computed(() => 
+      cart.value.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    );
+
     return {
       cart,
       removeFromCart: cartStore.removeFromCart,
-      clearCart: cartStore.clearCart
+      clearCart: cartStore.clearCart,
+      totalPrice
     };
   }
 };
 </script>
+
+<style>
+.title {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+.price {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+.total-price {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 10px;
+}
+</style>

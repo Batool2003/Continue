@@ -20,11 +20,22 @@
           <v-card-subtitle>{{ product.price }} $</v-card-subtitle>
           <v-card-text>
             <p>{{ product.description }}</p>
+     
+
           </v-card-text>
 
           <!-- زر "إضافة إلى السلة" -->
           <v-card-actions>
-            <v-btn color="primary" @click="addToCart(product)">إضافة إلى السلة</v-btn>
+            <v-btn  variant="outlined"
+  color="accent" 
+  rounded 
+  class="btn-hover" @click="addToCart(product)"> Add to cart</v-btn>
+            <v-btn 
+ 
+  @click="addToCart(product)"
+>
+ 
+</v-btn>
           </v-card-actions>
         </v-card>
 

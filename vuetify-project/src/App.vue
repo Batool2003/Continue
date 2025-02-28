@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app elevation="4" class="custom-navbar">
+    <v-app-bar app elevation="4" class="color-nav"color="primary" >
       <v-container class="d-flex align-center justify-space-between">
         <!-- الشعار -->
         <v-btn text class="logo" to="/">Zahiah Grow</v-btn>
@@ -37,12 +37,11 @@ const toggleTheme = () => {
 </script>
 
 <style>
-.custom-navbar {
-  background-color: var(--v-theme-primary); /* كحلي داكن */
-  color: #D7CCC8; /* اللون الثانوي */
+.color-nav{
   font-size: 18px;
   font-weight: bold;
   padding: 12px 24px;
+  /* background-color: primary; */
 }
 
 .nav-link {
