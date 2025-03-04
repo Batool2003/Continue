@@ -1,9 +1,15 @@
 <template>
   <v-app>
-    <v-app-bar app elevation="4" class="color-nav"color="primary" >
+    <v-app-bar app elevation="4" class="color-nav" color="primary">
       <v-container class="d-flex align-center justify-space-between">
-        <!-- الشعار -->
-        <v-btn text class="logo" to="/">Zahiah Grow</v-btn>
+        <v-img 
+          :src="image" 
+          alt="Zahiah Grow"  
+          height="100"
+          width="100"
+          contain
+          class="logo">
+        </v-img>
 
         <!-- روابط التصفح -->
         <v-spacer></v-spacer>
@@ -12,14 +18,11 @@
           <RouterLink class="nav-link" to="/about">About</RouterLink>
           <RouterLink class="nav-link" to="/profile">Profile</RouterLink>
           <RouterLink class="nav-link" to="/product">Details</RouterLink>
-          <RouterLink class="nav-link" to="/signup">Signup</RouterLink>
+          <RouterLink class="nav-link" to="/signUp">Signup</RouterLink>
+          <RouterLink class="nav-link" to="/LogIn">LogIn</RouterLink>
           <RouterLink class="nav-link" to="/cart">CartPage</RouterLink>
+          
         </nav>
-
-        <!-- زر التبديل بين الوضعين -->
-        <v-btn @click="toggleTheme" text>
-          {{ isDark ? 'Light Mode' : 'Dark Mode' }}
-        </v-btn>
       </v-container>
     </v-app-bar>
 
@@ -29,19 +32,15 @@
   </v-app>
 </template>
 
-<script>
-const toggleTheme = () => {
-  isDark.value = !isDark.value;
-  theme.global.name.value = isDark.value ? "dark" : "light";
-};
+<script setup>
+import image from './assets/img.png'; // استيراد الصورة
 </script>
 
 <style>
-.color-nav{
+.color-nav {
   font-size: 18px;
   font-weight: bold;
   padding: 12px 24px;
-  /* background-color: primary; */
 }
 
 .nav-link {
@@ -49,7 +48,13 @@ const toggleTheme = () => {
   margin-right: 20px;
   text-decoration: none;
 }
+
 .nav-link:hover {
   color: #D84315; /* لون التمييز عند التمرير */
+}
+
+/* ضبط الصورة بحيث لا تُقص */
+.logo {
+  object-fit: contain;
 }
 </style>

@@ -34,6 +34,7 @@
       rounded
       color="secondary"
       class="my-3"
+      :style="{ borderColor: '#D4AF37' }"
     ></v-select>
 
     <!-- عرض التحميل -->
@@ -54,32 +55,30 @@
     <v-row v-else>
       <v-col v-for="product in paginatedProducts" :key="product.id" cols="12" sm="6" md="4">
         <v-card class="pa-4" rounded>
-          <v-img :src="product.image" height="300px" cover></v-img>
+          <v-img :src="product.image" height="250px" contain></v-img>
           <v-card-title>{{ product.title }}</v-card-title>
           <v-card-subtitle>{{ product.price }} $</v-card-subtitle>
           <v-card-actions>
             <!-- زر إضافة إلى السلة -->
             <v-btn 
-  variant="outlined"
-  color="accent" 
-  rounded 
-  class="btn-hover"
-  @click="addToCart(product)"
->
-  Add to cart
-</v-btn>
-
+              variant="outlined"
+              color="accent" 
+              rounded 
+              class="btn-hover"
+              @click="addToCart(product)"
+            >
+              Add to cart
+            </v-btn>
 
             <!-- زر تفاصيل المنتج -->
             <v-btn 
-            variant="outlined"
+              variant="outlined"
               color="secondary" 
               rounded 
               class="btn-hover" 
               :to="`/product/${product.id}`"
-
             >
-            Product details
+              Product details
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -103,16 +102,8 @@ import { useCartStore } from '@/store/cart';
 
 export default {
   setup() {
-
-// const cartStore = useCartStore();
-// const addToCart = (product) => {
-//   cartStore.addToCart(product);
-//   console.log("تمت إضافة المنتج:", product);
-// };
-
     const productStore = useProductStore();
     const cartStore = useCartStore();
-    // console.log("تمت إضافة المنتج:", product);
     const search = ref('');
     const selectedCategory = ref(null);
     const sortBy = ref(null);
@@ -173,9 +164,7 @@ export default {
 </script>
 
 <style>
-
-.v-btn{
+.v-btn {
   font-weight: bold;
-
 }
 </style>

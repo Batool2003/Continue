@@ -1,63 +1,82 @@
 <template>
-  <v-container>
+  <v-container fluid class="fill-height d-flex flex-column justify-center align-center bg-grey-lighten-3 mt-5">
     <v-row>
-      <v-col cols="12" md="6" class="d-flex align-center">
-        <v-img
-          src="https://source.unsplash.com/featured/?mobile,technology"
-          max-width="300"
-          contain
-        ></v-img>
+      <v-col cols="12" class="text-center mt-5">
+  <h1 class="text-h2 font-weight-bold primary--text mb-3">Welcome to Our Store</h1>
+  <h2 class="text-h5 secondary--text">Your Satisfaction is Our Priority!</h2>
+</v-col>
+
+    </v-row>
+    <v-row align="center" class="pa-5">
+      <v-col cols="12" md="6">
+        <p class="text-body-1">
+          <strong>Why Choose Us?</strong>
+        </p>
+        <p>
+          Discover a unique shopping experience where quality meets affordability.
+          We provide carefully curated products to meet your needs and lifestyle.
+        </p>
+        <p>
+          Our store guarantees high-quality products sourced from trusted suppliers.
+          Enjoy an easy and hassle-free shopping experience with us!
+        </p>
+        <p class="accent--text font-weight-bold">
+          "Great Products, Great Prices, Great Service."
+        </p>
       </v-col>
       <v-col cols="12" md="6">
-        <h2>About Us</h2>
-        <h3 class="text-subtitle-1">Sample Headline</h3>
-        <p>
-          Welcome to [Your Store Name]! We are dedicated to providing high-quality products with exceptional customer service. Our mission is to offer a seamless shopping experience with a carefully curated selection of items that cater to your needs. Whether you're looking for the latest trends or timeless essentials, we strive to bring you the best.
-
-At [Your Store Name], customer satisfaction is our top priority. We value trust, quality, and innovation, ensuring that every purchase meets your expectations. Thank you for choosing us—we look forward to serving you!
-        </p>
-        <v-btn color="black" class="mt-4">Contact Us</v-btn>
+        <v-img :src="image" alt="Store Image" max-height="350" max-width="100%" style="object-fit: cover;"></v-img>
       </v-col>
     </v-row>
-    <v-row class="mt-8">
-      <v-col cols="12" md="4">
-        <v-card class="pa-4 text-center" color="orange">
-          <v-icon size="40">mdi-phone</v-icon>
-          <h3>CALL US</h3>
-          <p>1 (234) 567-891, 1 (234) 987-654</p>
-        </v-card>
+    <v-row class="pa-5">
+      <v-col cols="12" class="text-center">
+        <h2 class="text-h4 font-weight-bold primary--text">Contact Us</h2>
       </v-col>
-      <v-col cols="12" md="4">
-        <v-card class="pa-4 text-center" color="orange">
-          <v-icon size="40">mdi-map-marker</v-icon>
-          <h3>LOCATION</h3>
-          <p>121 Rock Street, 21 Avenue, New York, NY 92103-9000</p>
-        </v-card>
+      <v-col cols="12" md="4" class="text-center">
+        <v-icon color="primary" size="50">mdi-phone</v-icon>
+        <p class="text-body-1">+123 456 7890</p>
       </v-col>
-      <v-col cols="12" md="4">
-        <v-card class="pa-4 text-center" color="orange">
-          <v-icon size="40">mdi-clock-outline</v-icon>
-          <h3>HOURS</h3>
-          <p>Mon – Fri: 11 am – 8 pm, Sat, Sun: 6 am – 8 pm</p>
-        </v-card>
+      <v-col cols="12" md="4" class="text-center">
+        <v-icon color="primary" size="50">mdi-email</v-icon>
+        <p class="text-body-1">contact@ourstore.com</p>
+      </v-col>
+      <v-col cols="12" md="4" class="text-center">
+        <v-icon color="primary" size="50">mdi-map-marker</v-icon>
+        <p class="text-body-1">123 Main Street, City</p>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import image from "@/assets/img.png";
 export default {
-  name: "AboutUs",
+  name: "StorePage",
+  data() {
+    return {
+      image,
+    };
+  },
 };
 </script>
 
 <style scoped>
-h2 {
-  font-size: 2rem;
-  font-weight: bold;
+.primary--text {
+  color: #2C3E50 !important;
 }
-p {
-  font-size: 1rem;
-  line-height: 1.5;
+.secondary--text {
+  color: #D4AF37 !important;
+}
+.accent--text {
+  color: #D84315 !important;
+}
+.bg-grey-lighten-3 {
+  background-color: #F0F0F0 !important;
+}
+.fill-height {
+  min-height: 100vh;
+}
+.mt-5 {
+  margin-top: 40px;
 }
 </style>

@@ -1,89 +1,64 @@
 <template>
-     <v-container>
-    <v-row justify="center">
-      <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>
-            <span class="headline">Sign Up</span>
-          </v-card-title>
-          <v-card-text>
-            <v-form @submit.prevent="handleSignup">
-              <v-text-field
-                v-model="fullName"
-                label="Full Name"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                v-model="email"
-                label="Email"
-                type="email"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                v-model="password"
-                label="Password"
-                type="password"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                v-model="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                required
-              ></v-text-field>
-
-              <v-alert v-if="errorMessage" type="error" class="mb-3">
-                {{ errorMessage }}
-              </v-alert>
-
-              <v-btn color="primary" type="submit" block>Sign Up</v-btn>
-            </v-form>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+  <v-container class="fill-height d-flex align-center justify-center" style="background-color: #F0F0F0;">
+    <v-card class="pa-6" width="400" elevation="10">
+      <v-card-title class="text-center text-h5" style="color: #2C3E50;">
+        Create Account
+      </v-card-title>
+      <v-card-text>
+        <v-form>
+          <v-text-field
+            label="Full Name"
+            type="text"
+            outlined
+            dense
+            class="mb-3"
+            color="#D4AF37"
+          ></v-text-field>
+          <v-text-field
+            label="Email"
+            type="email"
+            outlined
+            dense
+            class="mb-3"
+            color="#D4AF37"
+          ></v-text-field>
+          <v-text-field
+            label="Password"
+            type="password"
+            outlined
+            dense
+            class="mb-3"
+            color="#D4AF37"
+          ></v-text-field>
+          <v-text-field
+            label="Confirm Password"
+            type="password"
+            outlined
+            dense
+            class="mb-3"
+            color="#D4AF37"
+          ></v-text-field>
+          <v-btn block color="#2C3E50" dark class="mt-3">
+            Create Account
+          </v-btn>
+        </v-form>
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "Signup",
-  data() {
-    return {
-      fullName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      errorMessage: "",
-    };
+  setup() {
+    return {};
   },
-  methods: {
-    handleSignup() {
-      if (!this.fullName || !this.email || !this.password || !this.confirmPassword) {
-        this.errorMessage = "All fields are required.";
-        return;
-      }
-
-      if (this.password !== this.confirmPassword) {
-        this.errorMessage = "Passwords do not match.";
-        return;
-      }
-
-      this.errorMessage = "";
-      console.log("Signing up with:", this.fullName, this.email, this.password);
-      // هنا يمكنك إرسال البيانات إلى API للتسجيل
-    }
-  }
 };
 </script>
 
-<style scoped>
-.headline {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1976D2; /* لون أزرق متناسق */
+<style>
+.v-text-field input {
+  border-color: #D4AF37 !important;
 }
 </style>
+
+
