@@ -5,35 +5,62 @@
         <v-img 
           :src="image" 
           alt="Zahiah Grow"  
-          height="100"
-          width="100"
+          height="120"
+          width="120"
           contain
-          class="logo">
-        </v-img>
+          class="logo"
+        ></v-img>
+
+        <v-spacer></v-spacer>
 
         <!-- روابط التصفح -->
-        <v-spacer></v-spacer>
         <nav class="me-6">
           <RouterLink class="nav-link" to="/">List</RouterLink>
           <RouterLink class="nav-link" to="/about">About</RouterLink>
           <RouterLink class="nav-link" to="/profile">Profile</RouterLink>
-          <RouterLink class="nav-link" to="/product">Details</RouterLink>
-          <RouterLink class="nav-link" to="/signUp">Signup</RouterLink>
-          <RouterLink class="nav-link" to="/LogIn">LogIn</RouterLink>
-          <RouterLink class="nav-link" to="/cart">CartPage</RouterLink>
-          
+          <!-- <RouterLink class="nav-link" to="/product">Details</RouterLink> -->
+
+          <!-- إظهار السلة إذا كان المستخدم مسجلاً دخولًا، وإلا إظهار SignUp/Login -->
+          <template v-if="isLoggedIn">
+            <RouterLink class="nav-link" to="/cart">Cart🛒</RouterLink>
+            <v-btn class="nav-link" @click="logout">Logout</v-btn>
+          </template>
+          <template v-else>
+            <RouterLink class="nav-link" to="/signUp">SignUp</RouterLink>
+            <RouterLink class="nav-link" to="/LogIn">LogIn</RouterLink>
+          </template>
         </nav>
       </v-container>
     </v-app-bar>
 
     <v-main>
-      <RouterView />
+      <RouterView @login-success="updateLoginStatus" />
     </v-main>
   </v-app>
 </template>
 
 <script setup>
-import image from './assets/img.png'; // استيراد الصورة
+import { ref, onMounted } from 'vue';
+import image from './assets/img.png';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const isLoggedIn = ref(false);
+
+// تحديث حالة تسجيل الدخول
+const updateLoginStatus = () => {
+  isLoggedIn.value = !!localStorage.getItem('userToken');
+};
+
+// تسجيل الخروج
+const logout = () => {
+  localStorage.removeItem('userToken');
+  isLoggedIn.value = false;
+  router.push('/login'); // توجيه المستخدم إلى صفحة تسجيل الدخول
+};
+
+// التحقق عند تحميل الصفحة
+onMounted(updateLoginStatus);
 </script>
 
 <style>
@@ -53,7 +80,6 @@ import image from './assets/img.png'; // استيراد الصورة
   color: #D84315; /* لون التمييز عند التمرير */
 }
 
-/* ضبط الصورة بحيث لا تُقص */
 .logo {
   object-fit: contain;
 }
