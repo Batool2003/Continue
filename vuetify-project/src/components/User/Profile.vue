@@ -1,84 +1,119 @@
-<template>hi</template>
+<template>
+  <!-- خلفية خفيفة وبطاقة في المنتصف -->
+  <div class="d-flex align-center justify-center fill-height" style="background-color:#f1f1f0;">
+    <v-card class="pa-15" max-width="600px" color="#ffffff" elevation="6">
+      <!-- القسم العلوي: صورة + اسم + وصف -->
+      <div class="d-flex align-center mb-4">
+        <v-avatar size="80" class="mr-4">
+          <v-img :src="profile.image" />
+        </v-avatar>
+        <div>
+          <div class="text-h5 font-weight-bold mb-1">{{ profile.name }}</div>
+          <div class="text-subtitle-1 grey--text">{{ profile.bio }}</div>
+        </div>
+      </div>
 
+      <v-divider></v-divider>
 
+      <!-- معلومات العمل -->
+      <div class="mt-4">
+        <div class="text-h6 font-weight-bold mb-2">Business Overview</div>
+        <ul>
+          <li><strong>Store Name:</strong> {{ profile.storeName }}</li>
+          <li><strong>Business Type:</strong> {{ profile.businessType }}</li>
+          <li><strong>Revenue:</strong> {{ profile.revenue }}</li>
+          <li><strong>Experience:</strong> {{ profile.experience }}</li>
+          <li><strong>Main Products:</strong> {{ profile.mainProducts }}</li>
+        </ul>
+      </div>
 
-<!-- <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col cols="12" md="8" lg="6">
-        <v-card class="pa-5">
-          <v-card-title class="text-h5 text-center">
-            الملف الشخصي للمتجر
-          </v-card-title>
-          <v-divider></v-divider>
+      <v-divider class="my-4"></v-divider>
 
-          <v-card-text class="text-center">
-            <v-avatar size="100">
-              <v-img src="https://randomuser.me/api/portraits/men/20.jpg" alt="Store Avatar"></v-img>
-            </v-avatar>
-            <h2 class="mt-3">{{ store.name }}</h2>
-            <p class="text-grey-darken-1">{{ store.email }}</p>
-            <v-chip class="mt-2" color="primary" label>{{ store.category }}</v-chip>
-            <p class="mt-3"><v-icon>mdi-map-marker</v-icon> {{ store.address }}</p>
-            <p><v-icon>mdi-phone</v-icon> {{ store.phone }}</p>
-            <v-rating v-model="store.rating" readonly color="amber" dense></v-rating>
-            <div class="mt-3 d-flex justify-center">
-              <v-btn icon :href="store.social.facebook" target="_blank">
-                <v-icon color="blue">mdi-facebook</v-icon>
-              </v-btn>
-              <v-btn icon :href="store.social.instagram" target="_blank">
-                <v-icon color="purple">mdi-instagram</v-icon>
-              </v-btn>
-              <v-btn icon :href="store.social.twitter" target="_blank">
-                <v-icon color="light-blue">mdi-twitter</v-icon>
-              </v-btn>
-              <v-btn icon :href="store.social.youtube" target="_blank">
-                <v-icon color="red">mdi-youtube</v-icon>
-              </v-btn>
-              <v-btn icon :href="store.social.linkedin" target="_blank">
-                <v-icon color="blue-darken-3">mdi-linkedin</v-icon>
-              </v-btn>
-            </div>
-          </v-card-text>
+      <!-- الاهتمامات / الاحتياجات -->
+      <div>
+        <div class="text-h6 font-weight-bold mb-2">Business Needs</div>
+        <ul>
+          <li v-for="(need, index) in profile.needs" :key="index">
+            {{ need }}
+          </li>
+        </ul>
+      </div>
 
-          <v-card-actions class="justify-center">
-            <v-btn color="primary" @click="editProfile">تحرير المعلومات</v-btn>
-            <v-btn color="success" @click="viewProducts">عرض المنتجات</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+      <v-divider class="my-4"></v-divider>
+
+      <!-- نقاط الألم -->
+      <div>
+        <div class="text-h6 font-weight-bold mb-2">Challenges</div>
+        <ul>
+          <li v-for="(pain, index) in profile.challenges" :key="index">
+            {{ pain }}
+          </li>
+        </ul>
+      </div>
+
+      <v-divider class="my-4"></v-divider>
+
+      <!-- الحلول المقترحة -->
+      <div>
+        <div class="text-h6 font-weight-bold mb-2">Proposed Solutions</div>
+        <ul>
+          <li v-for="(solution, index) in profile.solutions" :key="index">
+            {{ solution }}
+          </li>
+        </ul>
+      </div>
+    </v-card>
+  </div>
 </template>
 
 <script>
+// ✅ الطريقة الأولى: باستخدام import (تأكد أن الملف موجود في المجلد الصحيح)
+import profileImage from '@/assets/name.jpg';
+
 export default {
+  name: 'EcommerceOwnerProfile',
   data() {
     return {
-      store: {
-        name: "متجر التقنية الحديثة",
-        email: "store@example.com",
-        category: "الإلكترونيات",
-        address: "شارع الملك فهد، الرياض، السعودية",
-        phone: "+966 50 123 4567",
-        rating: 4.5,
-        social: {
-          facebook: "https://facebook.com/store",
-          instagram: "https://instagram.com/store",
-          twitter: "https://twitter.com/store",
-          youtube: "https://youtube.com/store",
-          linkedin: "https://linkedin.com/company/store",
-        },
-      },
+      profile: {
+        // ✅ الطريقة الثانية: يمكن تجربة require إذا لم يعمل import
+        image: profileImage, // أو: require('@/assets/name.jpg')
+
+        name: 'John Carter',
+        bio: 'Entrepreneur & founder of a successful online store',
+        storeName: 'Tech & Fashion Hub',
+        businessType: 'E-commerce Store',
+        revenue: '$250K annually',
+        experience: '5+ years in online retail',
+        mainProducts: 'Electronics, Apparel, Accessories',
+        needs: [
+          'Effective digital marketing strategies',
+          'Reliable payment gateways',
+          'Efficient inventory management',
+          'Customer retention & loyalty programs'
+        ],
+        challenges: [
+          'High competition in the online market',
+          'Managing product returns and refunds',
+          'Optimizing logistics and delivery',
+          'Ensuring secure transactions'
+        ],
+        solutions: [
+          'Advanced SEO and social media campaigns',
+          'Integration with top-tier payment solutions',
+          'Automated stock and order tracking system',
+          'AI-powered fraud detection for transactions'
+        ]
+      }
     };
-  },
-  methods: {
-    editProfile() {
-      alert("فتح نافذة تعديل معلومات المتجر");
-    },
-    viewProducts() {
-      alert("عرض قائمة المنتجات");
-    },
-  },
-};
-</script> -->
+  }
+}
+</script>
+
+<style scoped>
+/* لضبط ارتفاع الصفحة بالكامل وجعل البطاقة في المنتصف رأسياً */
+.fill-height {
+  height: 100vh;
+  padding: 80px;
+  background-color: aliceblue;
+}
+</style>

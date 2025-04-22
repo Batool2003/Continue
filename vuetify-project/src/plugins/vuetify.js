@@ -2,21 +2,23 @@ import { createVuetify } from 'vuetify'
 import 'vuetify/styles'
 
 const customTheme = {
-  dark: false, // أو true إذا كنت تريد الوضع الداكن
+  dark: false, 
   colors: {
-    primary: '#2C3E50', // أزرق داكن (أناقة واحترافية)
-    secondary: '#D4AF37', // ذهبي (لمسة فاخرة وجذابة)
-    background: '#F0F0F0', // رمادي فاتح (إضاءة ووضوح)
-    accent: '#D84315', // برتقالي محروق (لإبراز العناصر المهمة)
+    primary: '#2C3E50', 
+    secondary: '#D4AF37', 
+    background: '#F0F0F0', 
+    accent: '#D84315', 
+  },
+  typography: {
+    fontFamily: 'Cairo, sans-serif', // استبدل بـ أي خط تريده
   }
 }
 
 export default createVuetify({
   theme: {
     themes: {
-      light: customTheme, // تحديد الثيم للضوء
-      dark: customTheme,  // تحديد الثيم للوضع الداكن
+      light: customTheme, 
+      dark: customTheme,  
     },
   },
 })
-

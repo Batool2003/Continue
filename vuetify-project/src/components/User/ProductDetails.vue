@@ -1,5 +1,6 @@
 <template>
-  <v-container>
+
+  <v-container class="mt-20 pa-5"> <!-- إضافة pa-5 هنا لتطبيق التباعد الداخلي -->
     <v-row v-if="loading">
       <v-col cols="12" class="text-center">
         <v-progress-circular indeterminate color="primary"></v-progress-circular>
@@ -14,14 +15,12 @@
 
     <v-row v-else>
       <v-col cols="12" v-if="product">
-        <v-card>
+        <v-card class="pa-5"> <!-- إضافة التباعد الداخلي للكارد أيضًا -->
           <v-img :src="product.image" height="400px"></v-img>
           <v-card-title>{{ product.title }}</v-card-title>
-          <v-card-subtitle color="">{{ product.price }} $</v-card-subtitle>
-          
-          <!-- تقييم المنتج بخمس نجوم -->
+          <v-card-subtitle>{{ product.price }} $</v-card-subtitle>
+
           <v-card-text>
-            <!-- <v-rating :model-value="product.rating || 0" color="amber" dense half-increments readonly :length="5"></v-rating> -->
             <p>{{ product.description }}</p>
             <p>⭐⭐⭐⭐</p>
           </v-card-text>
@@ -81,3 +80,4 @@ export default {
   }
 };
 </script>
+<style></style>

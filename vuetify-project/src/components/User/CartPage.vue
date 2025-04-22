@@ -1,8 +1,8 @@
 <template>
-  <v-container>
+  <v-container class="mt-15">
+
     <h2 class="title">🛒 Shopping cart</h2>
 
-    <!-- عرض المنتجات في السلة -->
     <v-list v-if="cart.length">
       <v-list-item v-for="item in cart" :key="item.id">
         <v-list-item-content>
@@ -10,21 +10,17 @@
           <v-list-item-subtitle class="price">Price: {{ item.price }} $</v-list-item-subtitle>
         </v-list-item-content>
 
-        <!-- زر حذف المنتج من السلة -->
         <v-btn color="accent" @click="removeFromCart(item.id)">❌</v-btn>
       </v-list-item>
     </v-list>
 
-    <!-- عرض المجموع عند وجود عناصر -->
     <v-alert v-if="cart.length" type="success" color="amber lighten-4" class="total-price">
   🏷️ Total: {{ totalPrice }} $
 </v-alert>
 
 
-    <!-- رسالة عند كون السلة فارغة -->
     <v-alert v-else type="info" color="accent">Cart empty</v-alert>
 
-    <!-- زر إفراغ السلة بالكامل -->
     <v-btn color="error" @click="clearCart" v-if="cart.length">Empty cart</v-btn>
   </v-container>
 </template>
@@ -38,7 +34,6 @@ export default {
     const cartStore = useCartStore();
     const cart = computed(() => cartStore.cart);
 
-    // حساب مجموع السعر
     const totalPrice = computed(() => 
       cart.value.reduce((sum, item) => sum + item.price * item.quantity, 0)
     );

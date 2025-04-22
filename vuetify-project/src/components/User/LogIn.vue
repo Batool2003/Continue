@@ -1,17 +1,17 @@
 <template>
   <v-container class="fill-height d-flex align-center justify-center">
     <v-card class="pa-6" width="400" elevation="10">
-      <v-card-title class="text-center text-h5">تسجيل دخول</v-card-title>
+      <v-card-title class="text-center text-h5"style="color: #D84315;">Log In</v-card-title>
       <v-card-text>
         <v-form @submit.prevent="handleLogin">
           <!-- تغيير النص من "Email" إلى "اسم المستخدم" -->
-          <v-text-field v-model="name" label="اسم المستخدم" type="text" outlined dense required></v-text-field>
+          <v-text-field v-model="name" label="user name" type="text" outlined dense required></v-text-field>
           
           <!-- تغيير النص من "Password" إلى "كلمة المرور" -->
-          <v-text-field v-model="password" label="كلمة المرور" type="password" outlined dense required></v-text-field>
+          <v-text-field v-model="password" label="Password" type="password" outlined dense required></v-text-field>
           
           <v-btn type="submit" block color="primary" class="mt-3">
-            تسجيل دخول
+            Log In
           </v-btn>
           
           <v-alert v-if="error" type="error" class="mt-3">{{ error }}</v-alert>
@@ -54,10 +54,15 @@ const handleLogin = async () => {
       router.push('/');  // إعادة التوجيه إلى الصفحة الرئيسية (أو إلى أي مسار آخر)
       router.go(0);  // تحديث الصفحة لتحديث Navbar (أو أي مكون آخر يعتمد على حالة التوكن)
     } else {
-      error.value = data.message || 'فشل في تسجيل الدخول. يرجى المحاولة مرة أخرى.';
+      error.value = data.message || 'Failed to login. Please try again.';
     }
   } catch (err) {
-    error.value = 'حدث خطأ. يرجى المحاولة مرة أخرى لاحقاً.';
-  }
+    error.value = 'An error occurred. Please try again later.';
+}
 };
 </script>
+<!-- johnd	m38rmF$
+mor_2314	83r5^_
+kevinryan	kev02937@
+donero	ewedon
+derek	jklg*_56 -->
